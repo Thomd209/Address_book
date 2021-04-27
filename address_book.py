@@ -53,8 +53,9 @@ class AddressBook:
                                            command=self.del_all)
         self.btn_del_all_contacts.place(x=5, y=250)
 
-        self.cnx = mysql.connector.MySQLConnection(host='localhost', user='thomd729', password='cLjq=p(6',
-                                                   database='address_book')
+        self.cnx = mysql.connector.MySQLConnection(host='localhost', user=input("Enter username: "),
+                                                   password=input("Enter password: "),
+                                                   database=input("Enter database name: "))
         self.cursor = self.cnx.cursor()
         all_names = 'SELECT name FROM address_book'
         self.cursor.execute(all_names)
@@ -116,6 +117,8 @@ class AddressBook:
 
         self.list_box.delete(0, END)
         self.name_ent.delete(0, END)
+        self.phone_ent.delete(0, END)
+        self.email_ent.delete(0, END)
 
         query = 'SELECT name FROM address_book'
         self.cursor.execute(query)
@@ -132,5 +135,6 @@ class AddressBook:
 
 
 root = Tk()
+root.title("Address book")
 AddressBook(root)
 root.mainloop()
